@@ -70,8 +70,12 @@ const FeaturedProductIntentHandler = {
   async handle(handlerInput) {
     const response = await httpGet();
     console.log(response);
-    console.log(response.data[0].name);
-
+    const data = await response.json();
+    data.forEach((obj) => {
+      Object.entries(obj).forEach(([key, value]) => {
+        console.log(`${key}, ${value}`);
+      });
+    });
     return handlerInput.responseBuilder
       .speak(`Okay, here is what I got for you ${response.data[0].name}`)
       .reprompt("Would you like to hear the featured product?")
