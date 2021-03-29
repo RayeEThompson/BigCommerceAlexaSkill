@@ -71,9 +71,8 @@ const FeaturedProductIntentHandler = {
     const response = await httpGet();
     console.log(response);
 
-    console.log(featuredProdStr);
     return handlerInput.responseBuilder
-      .speak(`Okay, here is what I got for you ${response.data[0].name}`)
+      .speak(`Okay, here is what Raye has for you ${response.data[0].name}`)
       .reprompt("Would you like to hear the featured product?")
       .getResponse();
   },
