@@ -14,10 +14,10 @@ function httpGet() {
     var options = {
       host: "https://api.bigcommerce.com",
       port: 443,
-      path: `/stores/${process.env.STORE_HASH}/v3/catalog/products?include_fields=name&is_featured=1`,
+      path: `/stores/ltgn22trch/v3/catalog/products?include_fields=name&is_featured=1`,
       method: "GET",
       headers: {
-        "X-Auth-Token": `${process.env.AUTH_TOKEN}`,
+        "X-Auth-Token": "awj6qjj90rrt899pq5kff6n4ypagp5k",
       },
     };
 
