@@ -69,15 +69,15 @@ const FeaturedProductIntentHandler = {
 
   async handle(handlerInput) {
     const response = await httpGet();
+    const featuredProdStr = "";
     console.log(response);
-    const data = await response.json();
-    data.forEach((obj) => {
-      Object.entries(obj).forEach(([key, value]) => {
-        console.log(`${key}, ${value}`);
-      });
-    });
+    for (let i = 0; i < values.length; i++) {
+      var results = JSON.parse(response);
+      featuredProdStr = featuredProdStr.concat(`${results.records}`);
+    }
+    console.log(featuredProdStr);
     return handlerInput.responseBuilder
-      .speak(`Okay, here is what I got for you ${response.data[0].name}`)
+      .speak(`Okay, here is what I got for you ${featuredProdStr}`)
       .reprompt("Would you like to hear the featured product?")
       .getResponse();
   },
