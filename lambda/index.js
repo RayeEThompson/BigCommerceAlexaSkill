@@ -5,41 +5,40 @@
  * */
 const Alexa = require("ask-sdk-core");
 const https = require("https");
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 
 dotenv.config();
 
 function httpGet() {
-    return new Promise(((resolve, reject) => {
-        var options = {
-            host: 'https://api.bigcommerce.com',
-            port: 443,
-            path: `/stores/${process.env.STORE_HASH}/v3/catalog/products?include_fields=name&is_featured=1`,
-            method: 'GET',
-            headers: {
-                'X-Auth-Token': `${process.env.AUTH_TOKEN}`,
-            },
-        };
-        
-        const request = https.request(options, (response) => {
-          response.setEncoding('utf8');
-          let returnData = '';
-    
-          response.on('data', (chunk) => {
-            returnData += chunk;
-          });
-    
-          response.on('end', () => {
-            resolve(JSON.parse(returnData));
-          });
-    
-          response.on('error', (error) => {
-            reject(error);
-          });
-        });
-        request.end();
-      }));
-    }
+  return new Promise((resolve, reject) => {
+    var options = {
+      host: "https://api.bigcommerce.com",
+      port: 443,
+      path: `/stores/${process.env.STORE_HASH}/v3/catalog/products?include_fields=name&is_featured=1`,
+      method: "GET",
+      headers: {
+        "X-Auth-Token": `${process.env.AUTH_TOKEN}`,
+      },
+    };
+
+    const request = https.request(options, (response) => {
+      response.setEncoding("utf8");
+      let returnData = "";
+
+      response.on("data", (chunk) => {
+        returnData += chunk;
+      });
+
+      response.on("end", () => {
+        resolve(JSON.parse(returnData));
+      });
+
+      response.on("error", (error) => {
+        reject(error);
+      });
+    });
+    request.end();
+  });
 }
 
 const LaunchRequestHandler = {
@@ -59,45 +58,25 @@ const LaunchRequestHandler = {
   },
 };
 
-// const HelloWorldIntentHandler = {
-//   canHandle(handlerInput) {
-//     return (
-//       Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
-//       Alexa.getIntentName(handlerInput.requestEnvelope) === "HelloWorldIntent"
-//     );
-//   },
-//   handle(handlerInput) {
-//     const speakOutput = "Hello World!";
-
-//     return (
-//       handlerInput.responseBuilder
-//         .speak(speakOutput)
-//         //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
-//         .getResponse()
-//     );
-//   },
-// };
-
 const FeaturedProductIntentHandler = {
-    canHandle(handlerInput) {
-      return (
-        Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
-        Alexa.getIntentName(handlerInput.requestEnvelope) === "FeaturedProductIntent"
-      );
-    },
+  canHandle(handlerInput) {
+    return (
+      Alexa.getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
+      Alexa.getIntentName(handlerInput.requestEnvelope) ===
+        "FeaturedProductIntent"
+    );
+  },
 
-      async handle(handlerInput) {
-        const response = await httpGet();
-        
-        console.log(response);
-      return (
-        handlerInput.responseBuilder
-          .speak(`Okay, here is what I got for you.` + response.object.data[0].name)
-          .reprompt('Would you like to hear the featured product?')
-          .getResponse()
-      );
-    }   
-}
+  async handle(handlerInput) {
+    const response = await httpGet();
+    console.log(response);
+
+    return handlerInput.responseBuilder
+      .speak(`Okay, here is what I got for you ${response.object.data[0].name}`)
+      .reprompt("Would you like to hear the featured product?")
+      .getResponse();
+  },
+};
 
 const HelpIntentHandler = {
   canHandle(handlerInput) {
