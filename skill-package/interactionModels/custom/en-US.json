@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "hello rayes bigcommerce store",
+      "invocationName": "rayes bigcommerce store",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",

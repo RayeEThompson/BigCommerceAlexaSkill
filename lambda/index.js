@@ -50,7 +50,7 @@ const LaunchRequestHandler = {
   },
   handle(handlerInput) {
     const speakOutput =
-      "Welcome, you can say Hello or Help. Which would you like to try?";
+      "Welcome, you can say Featured Products or Help. Which would you like to try?";
 
     return handlerInput.responseBuilder
       .speak(speakOutput)
@@ -93,7 +93,7 @@ const FeaturedProductIntentHandler = {
       return (
         handlerInput.responseBuilder
           .speak(`Okay, here is what I got for you.` + response.object.data[0].name)
-          .reprompt('What would you like?')
+          .reprompt('Would you like to hear the featured product?')
           .getResponse()
       );
     }   
