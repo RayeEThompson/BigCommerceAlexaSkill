@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "hello raye",
+      "invocationName": "hello rayes bigcommerce store",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -26,6 +26,19 @@
             "hi",
             "say hello world",
             "say hello"
+          ]
+        },
+        {
+          "name": "FeaturedProductIntent",
+          "slots": [],
+          "samples": [
+            "what are the featured products",
+            "what featured products are there",
+            "say featured products",
+            "tell me the featured products",
+            "are there featured products",
+            "featured products",
+            "products that are featured"
           ]
         },
         {
