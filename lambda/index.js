@@ -12,9 +12,9 @@ dotenv.config();
 function httpGet() {
   return new Promise((resolve, reject) => {
     var options = {
-      host: "https://api.bigcommerce.com",
+      host: "https://api.bigcommerce.com/stores/ltgn22trch",
       port: 443,
-      path: `/stores/ltgn22trch/v3/catalog/products?include_fields=name&is_featured=1`,
+      path: "/v3/catalog/products?include_fields=name&is_featured=1",
       method: "GET",
       headers: {
         "X-Auth-Token": "awj6qjj90rrt899pq5kff6n4ypagp5k",
